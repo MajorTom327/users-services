@@ -42,6 +42,41 @@
         },
         "cwd": "${workspaceFolder}"
       }
+    },{
+      "type": "shell",
+      "label": "Prisma: full new migration",
+      "detail": "Generate a new migration and apply it",
+      "command": "yarn prisma migrate dev --create-only --name \"${input:migrationName}\" && yarn prisma migrate deploy && yarn prisma generate",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Prisma: Migrate",
+      "detail": "Generate a new migration and apply it",
+      "command": "yarn prisma migrate deploy && yarn prisma generate && yarn prisma db seed",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Prisma: Generate",
+      "detail": "Generate Prisma Client",
+      "command": "yarn prisma generate",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "command": "yarn prisma db seed",
+      "problemMatcher": [],
+      "label": "Prisma: Seed",
+      "detail": "Apply the seed script to the database"
+    },
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "description": "Name of the migration:",
+      "default": "init",
+      "type": "promptString"
     }
   ]
 }

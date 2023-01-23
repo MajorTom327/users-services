@@ -6,8 +6,7 @@ export const typeDefs = `#graphql
     hello: String
     user(id: ID!): User
     users: [User]
-    checkPassword(userId: ID!, password: String!): Boolean
-
+    session(id: ID!): Session
   }`
 
 export const resolvers = {
@@ -15,8 +14,7 @@ export const resolvers = {
     hello: () => 'Hello world!',
     user: (_: any, args: { id: string }, context: any) => (new UserResolver(context)).user(args.id),
     users: (_: any, __: any, context: any) => (new UserResolver(context)).users(),
-    checkPassword: (_: any, args: { userId: string, password: string }, context: any) => (new PasswordResolver(context)).checkPassword(args.userId, args.password)
-
+    session: (_: any, args: { id: string }, context: any) => (new PasswordResolver(context)).session(args.id)
   }
 }
 

@@ -1,5 +1,6 @@
 import { Password } from '@prisma/client'
 import { DateTime } from 'luxon'
+import { DateResolverConvert } from '../helpers/DateResolverConvert'
 
 export const typeDefs = `#graphql
   type Password {
@@ -14,8 +15,8 @@ export const resolvers = {
   Password: {
     id: (parent: Password) => parent.id,
     hash: (parent: Password) => parent.hash,
-    createdAt: (parent: Password) => DateTime.fromJSDate(parent.createdAt).toISO(),
-    updatedAt: (parent: Password) => DateTime.fromJSDate(parent.updatedAt).toISO()
+    createdAt: (parent: Password) => DateResolverConvert('createdAt')(parent),
+    updatedAt: (parent: Password) => DateResolverConvert('updatedAt')(parent)
   }
 }
 

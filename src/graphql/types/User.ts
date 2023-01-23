@@ -1,6 +1,7 @@
 import UserResolver from '~/resolvers/UserResolver'
-import { DateTime } from 'luxon'
 import { User } from '@prisma/client'
+import { DateResolverConvert } from '../helpers/DateResolverConvert'
+import { PasswordResolver } from '~/resolvers/PasswordResolver'
 
 export const typeDefs = `#graphql
   type User {
@@ -9,6 +10,7 @@ export const typeDefs = `#graphql
     profile: UserProfile
     createdAt: String!
     updatedAt: String!
+    session: Session
   }
 `
 
@@ -17,8 +19,9 @@ export const resolvers = {
     id: (parent: User) => parent.id,
     email: (parent: User) => parent.email,
     profile: (parent: User, _: any, context: any) => (new UserResolver(context)).userProfile(parent.id),
-    createdAt: (parent: User) => DateTime.fromJSDate(parent.createdAt).toISO(),
-    updatedAt: (parent: User) => DateTime.fromJSDate(parent.updatedAt).toISO()
+    createdAt: (parent: User) => DateResolverConvert('createdAt')(parent),
+    updatedAt: (parent: User) => DateResolverConvert('updatedAt')(parent),
+    session: (parent: User, _: any, context: any) => (new PasswordResolver(context)).sessionForUser(parent.id)
   }
 }
 
