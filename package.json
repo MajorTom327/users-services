@@ -7,17 +7,23 @@
     "build": "node ./scripts/build.mjs",
     "dev": "npm-run-all --parallel dev:*",
     "dev:build": "nodemon --watch ./src --watch ./scripts --ext ts,mjs --exec npm run build",
-    "dev:server": "nodemon --watch ./dist --ext js --exec node ./dist/index.js"
+    "dev:server": "nodemon --watch ./dist --ext js --exec node ./dist/index.js",
+    "test": "vitest --config ./config/vitest.config.mjs --coverage",
+    "test:ci": "vitest --config ./config/vitest.config.mjs --coverage run"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.38",
     "@types/express": "^4.17.15",
     "@types/node": "^18.11.18",
     "@types/ramda": "^0.28.21",
+    "@vitest/coverage-c8": "^0.28.1",
     "esbuild": "^0.17.4",
     "nodemon": "^2.0.20",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4",
+    "vite-tsconfig-paths": "^4.0.5",
+    "vitest": "^0.28.1"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
