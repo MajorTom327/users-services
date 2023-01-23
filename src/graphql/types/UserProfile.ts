@@ -1,4 +1,4 @@
-import UserProfile from '~/entities/UserProfile'
+import { UserProfile } from '@prisma/client'
 
 export const typeDefs = `#graphql
   type UserProfile {

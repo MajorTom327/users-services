@@ -1,5 +1,6 @@
-import User from '~/entities/User'
 import UserResolver from '~/resolvers/UserResolver'
+import { DateTime } from 'luxon'
+import { User } from '@prisma/client'
 
 export const typeDefs = `#graphql
   type User {
@@ -16,8 +17,8 @@ export const resolvers = {
     id: (parent: User) => parent.id,
     email: (parent: User) => parent.email,
     profile: (parent: User, _: any, context: any) => (new UserResolver(context)).userProfile(parent.id),
-    createdAt: (parent: User) => parent.createdAt,
-    updatedAt: (parent: User) => parent.updatedAt
+    createdAt: (parent: User) => DateTime.fromJSDate(parent.createdAt).toISO(),
+    updatedAt: (parent: User) => DateTime.fromJSDate(parent.updatedAt).toISO()
   }
 }
 

@@ -5,12 +5,14 @@ const isProd = process.env.NODE_ENV === 'production'
 
 // Add here all the env vars you want to be available in the bundle
 const envVarsKeys = [
-  'NODE_ENV'
+  'NODE_ENV',
+  'PORT',
+  'DATABASE_URL'
 ]
 
 // Add here all the external dependencies you want to be available in the bundle
 const external = [
-  'path', 'express', '@apollo', 'body-parser', 'compression', 'buffer'
+  'path', 'express', '@apollo', 'body-parser', 'compression', 'buffer', 'prisma', '@prisma/client'
 ]
 
 export const baseSettings = {

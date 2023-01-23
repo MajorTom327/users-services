@@ -1,27 +1,48 @@
-import User from '~/entities/User'
-import UserProfile from '~/entities/UserProfile'
+
+import { User, UserProfile } from '@prisma/client'
+import prisma from '~/prisma'
 import { BaseResolver } from './BaseResolver'
 
 export class UserResolver extends BaseResolver {
   public async users (): Promise<User[]> {
-    return []
+    return prisma.user.findMany()
   }
 
-  public user (id: string): User {
-    return {
-      id,
-      email: 'jconnor@sky.net',
-      createdAt: '2019-01-01T00:00:00.000Z',
-      updatedAt: '2019-01-01T00:00:00.000Z'
-    }
+  public async user (id: string): Promise<User | null> {
+    return prisma.user.findUnique({
+      where: {
+        id
+      }
+    })
   }
 
-  public userProfile (id: string): UserProfile {
-    return {
-      id,
-      firstname: 'John',
-      lastname: 'Connor'
-    }
+  public async createUser (email: string): Promise<User | null> {
+    return prisma.user.create({
+      data: {
+        email
+      }
+    })
+  }
+
+  public async userProfile (userId: string): Promise<UserProfile | null> {
+    return prisma.userProfile.findUnique({
+      where: {
+        userId
+      }
+    })
+  }
+
+  public async setUserProfile (userId: string, input: UserProfile): Promise<UserProfile | null> {
+    return prisma.userProfile.upsert({
+      where: {
+        userId
+      },
+      update: input,
+      create: {
+        ...input,
+        userId
+      }
+    })
   }
 }
 
