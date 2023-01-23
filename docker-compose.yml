@@ -1,5 +1,24 @@
 version: "3.7"
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/dev
+      - NODE_ENV=development
+      - AUTH_TOKEN_SECRET=secret
+    volumes:
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+    entrypoint: ["yarn", "dev"]
+
+
   postgres:
     image: postgres:latest
     restart: always

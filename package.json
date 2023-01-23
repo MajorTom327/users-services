@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node ./dist/index.js",
     "build": "node ./scripts/build.mjs",
     "dev": "npm-run-all --parallel dev:*",
     "dev:build": "nodemon --watch ./src --watch ./scripts --ext ts,mjs --exec npm run build",

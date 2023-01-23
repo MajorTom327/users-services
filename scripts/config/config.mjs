@@ -7,7 +7,8 @@ const isProd = process.env.NODE_ENV === 'production'
 const envVarsKeys = [
   'NODE_ENV',
   'PORT',
-  'DATABASE_URL'
+  'DATABASE_URL',
+  'AUTH_TOKEN_SECRET'
 ]
 
 // Add here all the external dependencies you want to be available in the bundle
@@ -28,7 +29,7 @@ export const baseSettings = {
   platform: 'browser',
 
   external,
-  define: R.reduce((add, key) => R.assoc(`${process.env[key]}`, `"${process.env[key]}"`, add), {}, envVarsKeys),
+  define: R.reduce((add, key) => R.assoc(`process.env.${key}`, `"${process.env[key]}"`, add), {}, envVarsKeys),
   plugins: [
   ]
 }
