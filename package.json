@@ -9,15 +9,22 @@
     "dev:build": "nodemon --watch ./src --watch ./scripts --ext ts,mjs --exec npm run build",
     "dev:server": "nodemon --watch ./dist --ext js --exec node ./dist/index.js",
     "test": "vitest --config ./config/vitest.config.mjs --coverage",
-    "test:ci": "vitest --config ./config/vitest.config.mjs --coverage run"
+    "test:ci": "vitest --config ./config/vitest.config.mjs --coverage run",
+    "lint": "eslint --fix --ext .ts ."
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.38",
     "@types/express": "^4.17.15",
     "@types/node": "^18.11.18",
     "@types/ramda": "^0.28.21",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@vitest/coverage-c8": "^0.28.1",
     "esbuild": "^0.17.4",
+    "eslint": "^8.32.0",
+    "eslint-config-standard-with-typescript": "^31.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
     "nodemon": "^2.0.20",
     "npm-run-all": "^4.1.5",
     "typescript": "^4.9.4",

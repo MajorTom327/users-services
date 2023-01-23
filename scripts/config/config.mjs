@@ -1,11 +1,11 @@
-import * as R from 'ramda';
+import * as R from 'ramda'
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NODE_ENV === 'production'
 
 export const baseSettings = {
   entryPoints: [
-    'src/index.ts',
+    'src/index.ts'
   ],
 
   bundle: true,
@@ -19,7 +19,7 @@ export const baseSettings = {
     'path', 'express'
   ],
   define: {
-    'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
+    'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
   },
   plugins: [
   ]
@@ -27,16 +27,16 @@ export const baseSettings = {
 
 export const devSettings = {
   jsxDev: true,
-  jsx: 'automatic',
+  jsx: 'automatic'
 }
 
 export const prodSettings = {
   minify: true,
   drop: ['debugger', 'console'],
-  treeShaking: true,
+  treeShaking: true
 }
 
 export const settings = R.compose(
-    R.when(R.always(isDev), R.mergeDeepRight(devSettings)),
-    R.when(R.always(isProd), R.mergeDeepRight(prodSettings)),
-  )(baseSettings);
+  R.when(R.always(isDev), R.mergeDeepRight(devSettings)),
+  R.when(R.always(isProd), R.mergeDeepRight(prodSettings))
+)(baseSettings)
