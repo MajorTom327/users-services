@@ -11,11 +11,13 @@ export const baseSettings = {
   bundle: true,
   sourcemap: false,
   target: 'es2015',
-  format: 'esm',
+  format: 'cjs',
   outdir: 'dist',
   platform: 'browser',
 
-  external: [],
+  external: [
+    'path', 'express'
+  ],
   define: {
     'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
   },

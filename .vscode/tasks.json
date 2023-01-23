@@ -4,7 +4,7 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "npm run build",
+      "command": "yarn build",
       "group": {
         "kind": "build",
         "isDefault": false
@@ -18,7 +18,8 @@
     {
       "label": "dev",
       "type": "process",
-      "command": "npm run dev",
+      "command": "yarn",
+      "args": ["dev"],
       "group": {
         "kind": "build",
         "isDefault": true
