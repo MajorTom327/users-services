@@ -21,7 +21,9 @@ export class Server {
   configure (): void {
     if (process.env.NODE_ENV === 'production') this.app.use(helmet)
     this.app.use(compression())
-    this.app.use(morgan('dev'))
+    this.app.use(morgan('dev', {
+      skip: (req, res) => req.baseUrl === '/graphql'
+    }))
     this.app.use(cors())
     this.app.use(json())
   }
