@@ -3,6 +3,16 @@ import * as R from 'ramda'
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NODE_ENV === 'production'
 
+// Add here all the env vars you want to be available in the bundle
+const envVarsKeys = [
+  'NODE_ENV'
+]
+
+// Add here all the external dependencies you want to be available in the bundle
+const external = [
+  'path', 'express', '@apollo', 'body-parser', 'compression', 'buffer'
+]
+
 export const baseSettings = {
   entryPoints: [
     'src/index.ts'
@@ -15,12 +25,8 @@ export const baseSettings = {
   outdir: 'dist',
   platform: 'browser',
 
-  external: [
-    'path', 'express'
-  ],
-  define: {
-    'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
-  },
+  external,
+  define: R.reduce((add, key) => R.assoc(`${process.env[key]}`, `"${process.env[key]}"`, add), {}, envVarsKeys),
   plugins: [
   ]
 }
